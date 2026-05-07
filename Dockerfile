@@ -1,7 +1,7 @@
 # ---- build stage ----
 FROM golang:1.23-alpine AS builder
 
-ADD https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.7/tailwindcss-linux-x64 /usr/local/bin/tailwindcss
+ADD https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.7/tailwindcss-linux-x64-musl /usr/local/bin/tailwindcss
 RUN chmod +x /usr/local/bin/tailwindcss
 
 WORKDIR /app
