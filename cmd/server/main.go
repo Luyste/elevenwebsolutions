@@ -22,5 +22,5 @@ func main() {
 	e.GET("/", handlers.Home)
 	e.POST("/contact", handlers.Contact)
 
-	e.Logger.Fatal(e.Start("localhost:42069"))
+	e.Logger.Fatal(e.Start(":3000"))
 }
