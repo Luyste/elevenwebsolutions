@@ -1,20 +1,15 @@
-# ---- tailwind stage ----
-FROM node:22-alpine AS tailwind
-
-WORKDIR /app
-RUN npm install -g @tailwindcss/cli
-COPY web ./web
-RUN npx @tailwindcss/cli -i web/static/css/input.css -o web/static/css/style.css --minify
-
 # ---- build stage ----
 FROM golang:1.23-alpine AS builder
+
+ADD https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.7/tailwindcss-linux-x64 /usr/local/bin/tailwindcss
+RUN chmod +x /usr/local/bin/tailwindcss
 
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-COPY --from=tailwind /app/web/static/css/style.css ./web/static/css/style.css
+RUN tailwindcss -i web/static/css/input.css -o web/static/css/style.css --minify
 RUN CGO_ENABLED=0 GOOS=linux go build -o server ./cmd/server/main.go
 
 # ---- run stage ----
