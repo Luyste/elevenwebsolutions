@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@source "../../views/**/*.html";
+
+@font-face {
+    font-display: swap;
+    font-family: "Space Grotesk";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/space-grotesk-v22-latin-regular.woff2")
+        format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "JetBrains Mono";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/jetbrains-mono-v24-latin-regular.woff2")
+        format("woff2");
+}
+
+@theme {
+    --color-ink: #0e0e12;
+    --color-ink2: #16161b;
+    --color-ink3: #22222a;
+    --color-rule: #1e1e25;
+    --color-paper: #f4f1eb;
+    --color-pink: #ff3d8a;
+    --color-mute: #8b8b95;
+    --color-mute-dim: #5c5c66;
+
+    --font-sans: "Space Grotesk", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+    html {
+        overflow-x: clip;
+    }
+    html,
+    body {
+        @apply bg-ink text-paper font-sans antialiased m-0 p-0;
+    }
+    a {
+        @apply text-inherit no-underline;
+    }
+}
+
+@utility mono {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--color-mute);
+}
+
+@utility pixel-img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+/* grain texture overlay */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* pixel notch tag — requires pseudo-elements with box-shadow */
+.tag {
+    @apply inline-flex items-center relative bg-pink text-ink font-mono text-[11px] font-semibold uppercase leading-none;
+    letter-spacing: 0.18em;
+    padding: 8px 12px;
+}
+.tag::before,
+.tag::after {
+    content: "";
+    @apply absolute bg-pink;
+}
+.tag::before {
+    top: -3px;
+    left: -3px;
+    width: 6px;
+    height: 3px;
+    box-shadow:
+        0 3px 0 0 var(--color-pink),
+        -3px 3px 0 0 var(--color-pink);
+}
+.tag::after {
+    bottom: -3px;
+    right: -3px;
+    width: 6px;
+    height: 3px;
+    box-shadow:
+        0 -3px 0 0 var(--color-pink),
+        3px -3px 0 0 var(--color-pink);
+}
+
+/* case card dots */
+.case-dots::before {
+    content: "";
+    @apply absolute top-3 left-3 w-2 h-2 bg-pink;
+    box-shadow:
+        12px 0 0 0 var(--color-pink),
+        24px 0 0 0 rgba(255, 61, 138, 0.5);
+}
+
+/* mobile nav toggle label text swap */
+.nav-toggle-label::after {
+  content: "Menu";
+}
+#nav-toggle:checked ~ nav .nav-toggle-label::after {
+  content: "Close";
+}
+
+/* mobile nav drawer — CSS-only toggle via hidden checkbox */
+.nav-drawer {
+  @apply fixed top-16 left-0 right-0 bottom-0 z-[9999] flex flex-col bg-ink;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.3s ease;
+}
+#nav-toggle:checked ~ .nav-drawer {
+  clip-path: inset(0 0 0 0);
+}
+
+/* service rows */
+.svc-row {
+  @apply grid items-center border-b border-rule cursor-pointer transition-[padding];
+  grid-template-columns: 80px 1fr 320px 18px;
+  gap: 32px;
+  padding: 28px 0;
+}
+.svc-row:first-child {
+  @apply border-t;
+}
+.svc-row:hover {
+  padding-left: 12px;
+}
+.svc-num {
+  @apply font-mono text-[13px] text-pink;
+  letter-spacing: 0.18em;
+}
+.svc-title {
+  @apply text-[32px] font-semibold transition-colors;
+  letter-spacing: -0.6px;
+}
+.svc-desc {
+  @apply text-[15px] text-mute leading-relaxed;
+}
+.svc-arrow {
+  @apply text-mute;
+}
+
+@media (max-width: 1024px) {
+  .svc-row {
+    grid-template-columns: 56px 1fr 28px;
+    grid-template-rows: auto auto;
+    gap: 16px 24px;
+    padding: 24px 0;
+  }
+  .svc-desc {
+    grid-column: 2 / 3;
+    max-width: 560px;
+  }
+  .svc-arrow {
+    grid-row: 1 / 2;
+  }
+}
+
+@media (max-width: 720px) {
+  .svc-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 8px;
+    padding: 20px 0;
+  }
+  .svc-row:hover {
+    padding-left: 0;
+  }
+  .svc-num {
+    @apply text-xs;
+  }
+  .svc-title {
+    @apply text-2xl;
+  }
+  .svc-desc {
+    grid-column: 1 / -1;
+    @apply text-sm;
+  }
+  .svc-arrow {
+    @apply hidden;
+  }
+}
+
+/* ticker animation */
+@keyframes ticker-scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+.ticker-track {
+    animation: ticker-scroll 24s linear infinite;
+}
+.ticker-track:hover {
+    animation-play-state: paused;
+}

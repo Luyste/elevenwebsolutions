@@ -1,0 +1,258 @@
+{{ define "layout" }}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Eleven Web Solutions — Studio</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <script
+            src="https://unpkg.com/htmx.org@2.0.3"
+            integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body hx-boost="true">
+        <!-- NAV -->
+        <input type="checkbox" id="nav-toggle" class="hidden peer/nav" />
+        <nav
+            class="sticky top-0 z-50 bg-ink/85 backdrop-blur-md border-b border-rule"
+        >
+            <div
+                class="max-w-7xl mx-auto px-5 md:px-8 lg:px-14 flex justify-between items-center h-16 lg:h-[76px]"
+            >
+                <a class="flex items-center gap-3" href="/">
+                    <span class="w-10 h-10 bg-pink overflow-hidden"
+                        ><img
+                            class="w-full h-full object-cover pixel-img"
+                            src="/static/assets/eleven-mascot.png"
+                            alt=""
+                    /></span>
+                    <span class="leading-none">
+                        <div class="text-base font-semibold -tracking-tight">
+                            Eleven
+                        </div>
+                        <div
+                            class="font-mono text-[9px] tracking-[0.25em] text-mute mt-1 uppercase"
+                        >
+                            Web Solutions
+                        </div>
+                    </span>
+                </a>
+                <!-- Desktop links -->
+                <div class="hidden lg:flex gap-9">
+                    <a
+                        class="font-mono text-xs tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#services"
+                        >Services</a
+                    >
+                    <a
+                        class="font-mono text-xs tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#work"
+                        >Work</a
+                    >
+                    <a
+                        class="font-mono text-xs tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#about"
+                        >About</a
+                    >
+                    <a
+                        class="font-mono text-xs tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#contact"
+                        >Contact</a
+                    >
+                </div>
+                <!-- Desktop CTA -->
+                <a
+                    class="hidden lg:inline-flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] uppercase bg-pink text-ink px-4 py-3 font-bold whitespace-nowrap hover:-translate-y-px transition-transform"
+                    href="#contact"
+                >
+                    Book a call {{ template "pixel-arrow-dark" }}
+                </a>
+                <!-- Mobile toggle -->
+                <label
+                    for="nav-toggle"
+                    class="nav-toggle-label lg:hidden inline-flex items-center gap-2 bg-transparent border border-rule text-paper px-3 py-2.5 font-mono text-[11px] tracking-[0.2em] uppercase cursor-pointer"
+                    aria-label="Toggle menu"
+                ></label>
+            </div>
+        </nav>
+        <!-- Mobile drawer (sibling of checkbox, controlled by :checked) -->
+        <div class="nav-drawer lg:hidden">
+            <div class="flex flex-col gap-7 px-8 pt-10">
+                <label for="nav-toggle"
+                    ><a
+                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#services"
+                        >Services</a
+                    ></label
+                >
+                <label for="nav-toggle"
+                    ><a
+                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#work"
+                        >Work</a
+                    ></label
+                >
+                <label for="nav-toggle"
+                    ><a
+                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#about"
+                        >About</a
+                    ></label
+                >
+                <label for="nav-toggle"
+                    ><a
+                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
+                        href="#contact"
+                        >Contact</a
+                    ></label
+                >
+            </div>
+            <label for="nav-toggle" class="block mx-8 mb-8 mt-auto">
+                <a
+                    class="inline-flex w-full items-center justify-center gap-2.5 font-mono text-sm tracking-[0.2em] uppercase bg-pink text-ink px-5 py-5 font-bold"
+                    href="#contact"
+                >
+                    Book a call {{ template "pixel-arrow-dark" }}
+                </a>
+            </label>
+        </div>
+
+        <main id="main">{{ template "content" . }}</main>
+
+        <!-- FOOTER -->
+        <footer class="bg-ink2 border-t border-rule pt-14 pb-10">
+            <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-14">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10"
+                >
+                    <div>
+                        <a class="flex items-center gap-3 mb-6" href="/">
+                            <span class="w-10 h-10 bg-pink overflow-hidden"
+                                ><img
+                                    class="w-full h-full object-cover pixel-img"
+                                    src="/static/assets/eleven-mascot.png"
+                                    alt=""
+                            /></span>
+                            <span class="leading-none">
+                                <div
+                                    class="text-base font-semibold -tracking-tight"
+                                >
+                                    Eleven
+                                </div>
+                                <div
+                                    class="font-mono text-[9px] tracking-[0.25em] text-mute mt-1 uppercase"
+                                >
+                                    Web Solutions
+                                </div>
+                            </span>
+                        </a>
+                        <p class="text-sm text-mute leading-relaxed max-w-60">
+                            A one-person studio building useful things on the
+                            web.
+                        </p>
+                    </div>
+                    <div>
+                        <h4
+                            class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4 font-medium"
+                        >
+                            Studio
+                        </h4>
+                        <ul class="list-none p-0 m-0 space-y-2.5">
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#services"
+                                    >Services</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#work"
+                                    >Work</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#about"
+                                    >About</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4 font-medium"
+                        >
+                            Connect
+                        </h4>
+                        <ul class="list-none p-0 m-0 space-y-2.5">
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#"
+                                    >Instagram
+                                    <span class="text-pink"
+                                        >@elevenwebsolutions</span
+                                    ></a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#"
+                                    >Twitter / X</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#"
+                                    >GitHub
+                                    <span class="text-pink">@Luyste</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="font-mono text-[11px] tracking-[0.22em] uppercase text-mute mb-4 font-medium"
+                        >
+                            Contact
+                        </h4>
+                        <ul class="list-none p-0 m-0 space-y-2.5">
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="mailto:elevenwebsolutions@gmail.com"
+                                    >elevenwebsolutions@gmail.com</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    class="text-[15px] text-paper hover:text-pink transition-colors"
+                                    href="#contact"
+                                    >Book a call</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col items-center text-center md:flex-row md:justify-between md:items-center md:text-left gap-3 mt-14 pt-7 border-t border-rule font-mono text-[10px] lg:text-[11px] tracking-[0.22em] uppercase text-mute"
+                >
+                    <span>&copy; 2026 Eleven Web Solutions</span>
+                    <span
+                        ><span class="text-pink">@elevenwebsolutions</span>
+                        &middot; elevenwebsolutions.nl</span
+                    >
+                    <span>Made with Go + htmx</span>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+{{ end }}

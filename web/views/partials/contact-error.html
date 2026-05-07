@@ -1,0 +1,23 @@
+{{ define "contact_error" }}
+<div id="contact-form">
+  <p class="font-mono text-xs tracking-[0.18em] uppercase text-pink mb-2">{{ .Error }}</p>
+  <form class="flex flex-col gap-5 w-full lg:min-w-[360px]" hx-post="/contact" hx-target="#contact-form" hx-swap="outerHTML">
+    <div class="flex flex-col gap-2">
+      <label class="mono" for="name">Name</label>
+      <input class="w-full bg-ink2 border border-ink3 text-paper font-sans text-base p-3.5 outline-none focus:border-pink transition-colors placeholder:text-mute-dim" type="text" id="name" name="name" placeholder="Your name" value="{{ .Name }}" required />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class="mono" for="email">Email</label>
+      <input class="w-full bg-ink2 border border-ink3 text-paper font-sans text-base p-3.5 outline-none focus:border-pink transition-colors placeholder:text-mute-dim" type="email" id="email" name="email" placeholder="you@example.com" value="{{ .Email }}" required />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label class="mono" for="message">Message</label>
+      <textarea class="w-full bg-ink2 border border-ink3 text-paper font-sans text-base p-3.5 outline-none focus:border-pink transition-colors placeholder:text-mute-dim resize-y min-h-[100px]" id="message" name="message" rows="4" placeholder="Tell me about your project..." required>{{ .Message }}</textarea>
+    </div>
+    <button type="submit" class="w-full bg-pink text-ink px-5 py-4 font-mono text-[13px] tracking-[0.22em] font-bold uppercase inline-flex items-center justify-center gap-3.5 hover:-translate-y-0.5 transition-transform border-none cursor-pointer">
+      Send message
+      {{ template "pixel-arrow-dark" }}
+    </button>
+  </form>
+</div>
+{{ end }}

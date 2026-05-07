@@ -3,18 +3,22 @@ package render
 import (
 	"html/template"
 	"io"
+	"path/filepath"
 
 	"github.com/labstack/echo/v4"
 )
 
 type Template struct {
-	templates      *template.Template
-	routeTemplates map[string]*template.Template
+	templates *template.Template
 }
 
 func NewTemplate() *Template {
+	files, _ := filepath.Glob("web/views/*.html")
+	partials, _ := filepath.Glob("web/views/partials/*.html")
+	files = append(files, partials...)
+
 	return &Template{
-		templates: template.Must(template.ParseGlob("web/views/**/*.html")),
+		templates: template.Must(template.ParseFiles(files...)),
 	}
 }
 
