@@ -81,43 +81,14 @@
         <!-- Mobile drawer (sibling of checkbox, controlled by :checked) -->
         <div class="nav-drawer lg:hidden">
             <div class="flex flex-col gap-7 px-8 pt-10">
-                <label for="nav-toggle"
-                    ><a
-                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
-                        href="#services"
-                        >Services</a
-                    ></label
-                >
-                <label for="nav-toggle"
-                    ><a
-                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
-                        href="#work"
-                        >Work</a
-                    ></label
-                >
-                <label for="nav-toggle"
-                    ><a
-                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
-                        href="#about"
-                        >About</a
-                    ></label
-                >
-                <label for="nav-toggle"
-                    ><a
-                        class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors"
-                        href="#contact"
-                        >Contact</a
-                    ></label
-                >
+                <a class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors" href="#services" onclick="document.getElementById('nav-toggle').checked=false">Services</a>
+                <a class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors" href="#work" onclick="document.getElementById('nav-toggle').checked=false">Work</a>
+                <a class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors" href="#about" onclick="document.getElementById('nav-toggle').checked=false">About</a>
+                <a class="font-mono text-xl tracking-[0.18em] uppercase text-mute hover:text-paper transition-colors" href="#contact" onclick="document.getElementById('nav-toggle').checked=false">Contact</a>
             </div>
-            <label for="nav-toggle" class="block mx-8 mb-8 mt-auto">
-                <a
-                    class="inline-flex w-full items-center justify-center gap-2.5 font-mono text-sm tracking-[0.2em] uppercase bg-pink text-ink px-5 py-5 font-bold"
-                    href="#contact"
-                >
-                    Book a call {{ template "pixel-arrow-dark" }}
-                </a>
-            </label>
+            <a class="inline-flex w-full items-center justify-center gap-2.5 font-mono text-sm tracking-[0.2em] uppercase bg-pink text-ink px-5 py-5 font-bold mx-8 mb-8 mt-auto" href="#contact" onclick="document.getElementById('nav-toggle').checked=false">
+                Book a call {{ template "pixel-arrow-dark" }}
+            </a>
         </div>
 
         <main id="main">{{ template "content" . }}</main>
